@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual y Guía de Ingeniería de Prompts</title>
+    <meta name="description" content="Guía interactiva SPA para dominar la ingeniería de prompts, técnicas avanzadas y patrones con LLMs.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <div class="brand-icon">IP</div>
+                <div class="brand-text">
+                    <h1>Prompt Engineering</h1>
+                    <span>Manual HTML5 & IA</span>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="Buscar técnica o patrón...">
+            </div>
+
+            <!-- Reading Progress -->
+            <div class="progress-card">
+                <div class="progress-header">
+                    <span>Progreso del Manual</span>
+                    <span id="progress-val">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-title">Introducción</div>
+                <a class="nav-item active" data-target="inicio">
+                    <span>🚀</span>
+                    <span class="nav-text">Inicio y Resumen</span>
+                    <span class="badge">01</span>
+                </a>
+                <a class="nav-item" data-target="fundamentos">
+                    <span>🧠</span>
+                    <span class="nav-text">Fundamentos</span>
+                    <span class="badge">02</span>
+                </a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Técnicas Clave</div>
+                <a class="nav-item" data-target="zero-shot">
+                    <span>🎯</span>
+                    <span class="nav-text">Zero-Shot & Few-Shot</span>
+                    <span class="badge">03</span>
+                </a>
+                <a class="nav-item" data-target="cot">
+                    <span>🔗</span>
+                    <span class="nav-text">Chain-of-Thought (CoT)</span>
+                    <span class="badge">04</span>
+                </a>
+                <a class="nav-item" data-target="role-prompting">
+                    <span>🎭</span>
+                    <span class="nav-text">Role Prompting</span>
+                    <span class="badge">05</span>
+                </a>
+                <a class="nav-item" data-target="formatting">
+                    <span>📐</span>
+                    <span class="nav-text">Formato e Instrucciones</span>
+                    <span class="badge">06</span>
+                </a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Patrones Avanzados</div>
+                <a class="nav-item" data-target="react-tot">
+                    <span>⚙️</span>
+                    <span class="nav-text">ReAct y Tree-of-Thoughts</span>
+                    <span class="badge">07</span>
+                </a>
+                <a class="nav-item" data-target="advanced-patterns">
+                    <span>🔀</span>
+                    <span class="nav-text">Chaining, Self-Consistency & RAG</span>
+                    <span class="badge">08</span>
+                </a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">Práctica & Demos</div>
+                <a class="nav-item" data-target="mejores-practicas">
+                    <span>✨</span>
+                    <span class="nav-text">Mejores Prácticas</span>
+                    <span class="badge">09</span>
+                </a>
+                <a class="nav-item" data-target="galeria">
+                    <span>📂</span>
+                    <span class="nav-text">Galería de Ejemplos</span>
+                    <span class="badge">10</span>
+                </a>
+                <a class="nav-item" data-target="demo">
+                    <span>🔬</span>
+                    <span class="nav-text">Playground Comparativo</span>
+                    <span class="badge">DEMO</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <button id="theme-toggle-btn" class="theme-toggle-btn">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Modo Oscuro</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="main-wrapper">
+        <header class="top-header">
+            <button id="mobile-toggle-btn" class="mobile-toggle" aria-label="Abrir menú">☰</button>
+            <div class="header-breadcrumbs">
+                <span>Manual Prompting</span>
+                <span>/</span>
+                <span id="current-crumb" class="active-crumb">Inicio y Resumen</span>
+            </div>
+            <div class="header-actions">
+                <span class="header-tag">HTML5 / IA / Prompt Engineering</span>
+            </div>
+        </header>
+
+        <main class="content-body">
+
+            <!-- ================= SECCIÓN: INICIO ================= -->
+            <section id="inicio" class="doc-section active">
+                <div class="section-header">
+                    <span class="section-tag">Bienvenido</span>
+                    <h1 class="section-title">Manual y Guía de Ingeniería de Prompts</h1>
+                    <p class="section-description">
+                        Una guía completa, interactiva y estructurada para dominar el arte y la ciencia de comunicarse con Modelos de Lenguaje (LLMs).
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>🎯 Objetivo del Manual</h2>
+                    <p>
+                        La <strong>Ingeniería de Prompts</strong> (Prompt Engineering) es la disciplina de estructurar textos e instrucciones para que un modelo de inteligencia artificial genere las respuestas más precisas, útiles y coherentes posibles.
+                    </p>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <span class="card-icon">🧠</span>
+                            <h3 class="card-title">Fundamentos</h3>
+                            <p class="card-desc">Tokens, ventana de contexto, anatomía de un prompt y limitaciones.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">🎯</span>
+                            <h3 class="card-title">Técnicas Clave</h3>
+                            <p class="card-desc">Zero-shot, Few-shot, Chain-of-Thought, Role prompting y estructuración.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">⚡</span>
+                            <h3 class="card-title">Patrones Avanzados</h3>
+                            <p class="card-desc">ReAct, Tree of Thoughts (ToT), Self-Consistency, Prompt Chaining y RAG-aware.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">🔬</span>
+                            <h3 class="card-title">Playground Demo</h3>
+                            <p class="card-desc">Simulador interactivo para comparar técnicas de prompts en tiempo real.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <h4>Sugerencia de Navegación</h4>
+                        <p>Usa la barra lateral para navegar entre secciones o el buscador en tiempo real. Marca cada capítulo completado para seguir tu avance. La preferencia de tema y el progreso se guardan en tu navegador (`localStorage`).</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <h4>Aviso de Seguridad y Privacidad</h4>
+                        <p>Este manual es 100% cliente estático. La sección "Playground Comparativo" funciona localmente con simulaciones sin requerir claves API ni enviar datos a servidores externos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: FUNDAMENTOS ================= -->
+            <section id="fundamentos" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 01</span>
+                    <h1 class="section-title">Fundamentos de Prompt Engineering</h1>
+                    <p class="section-description">
+                        Conceptos esenciales para entender cómo procesan los LLMs las instrucciones de entrada.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. Anatomía de un Prompt Perfecto</h2>
+                    <p>Un prompt profesional bien estructurado suele estar compuesto por cuatro elementos fundamentales:</p>
+
+                    <div class="prompt-anatomy">
+                        <div class="anatomy-box role">
+                            <strong>1. Rol / Persona:</strong> Define la identidad y perspectiva del modelo (ej: <em>"Actúa como un arquitecto de software senior..."</em>).
+                        </div>
+                        <div class="anatomy-box instruction">
+                            <strong>2. Instrucción / Tarea:</strong> La acción clara y específica que debe realizar el modelo (ej: <em>"Analiza el siguiente código y detecta vulnerabilidades de seguridad."</em>).
+                        </div>
+                        <div class="anatomy-box context">
+                            <strong>3. Contexto / Restricciones:</strong> Información de fondo, formato de salida deseado o límites (ej: <em>"Responde solo en JSON. Máximo 200 palabras."</em>).
+                        </div>
+                        <div class="anatomy-box input">
+                            <strong>4. Entrada / Datos:</strong> El texto, código o información que debe procesarse.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Tokens y Ventana de Contexto</h2>
+                    <p>Los modelos de lenguaje no leen palabras completas sino <strong>tokens</strong> (subpalabras o grupos de caracteres). En promedio, 100 tokens equivalen a unas 75 palabras en inglés o ~50 palabras en español.</p>
+                    <ul>
+                        <li><strong>Context Window:</strong> Es la cantidad máxima de tokens (entrada + salida) que el modelo puede retener en un turno. Por ejemplo, 128k tokens en modelos modernos.</li>
+                        <li><strong>Atención:</strong> Las instrucciones colocadas al inicio y al final del prompt reciben mayor atención ("Efecto Primacía y Reciente").</li>
+                    </ul>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Entiendes los 4 componentes de un prompt y el concepto de tokens?</span>
+                    <button class="completion-btn" data-section="fundamentos">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: ZERO-SHOT & FEW-SHOT ================= -->
+            <section id="zero-shot" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 02</span>
+                    <h1 class="section-title">Zero-Shot y Few-Shot Prompting</h1>
+                    <p class="section-description">
+                        Aprende a solicitar respuestas directas o proveer ejemplos guía antes de solicitar la respuesta.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. Zero-Shot Prompting</h2>
+                    <p>Consiste en pedir al modelo que realice una tarea sin proporcionarle ningún ejemplo previo. Confía en el conocimiento previo que el LLM adquirió durante su entrenamiento.</p>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Ejemplo — Zero-Shot</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Clasifica el sentimiento del siguiente comentario como Positivo, Negativo o Neutro.
+
+Comentario: "El producto llegó a tiempo pero el empaque estaba algo maltratado."
+Sentimiento:</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Few-Shot Prompting</h2>
+                    <p>Proporciona 1, 2 o más ejemplos (shots) de entrada y salida esperada antes del problema real. Es ideal para estandarizar formatos de salida o condicionar estilos específicos.</p>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Ejemplo — Few-Shot (Format Conditioning)</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Transforma las descripciones de productos en etiquetas cortas de SEO:
+
+Texto: "Zapatillas deportivas rojas con suela de goma antiderrapante para correr."
+Etiquetas: [zapatillas, running, calzado-rojo, suela-goma]
+
+Texto: "Portátil ultraligero de 14 pulgadas con procesador i7 y 16GB RAM."
+Etiquetas: [laptop, ultrabook, intel-i7, 16gb-ram]
+
+Texto: "Cafetera de goteo programable de acero inoxidable con jarra de vidrio."
+Etiquetas:</code></pre>
+                    </div>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Comprendes la diferencia entre Zero-Shot y Few-Shot prompting?</span>
+                    <button class="completion-btn" data-section="zero-shot">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: CHAIN-OF-THOUGHT ================= -->
+            <section id="cot" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 03</span>
+                    <h1 class="section-title">Chain-of-Thought (CoT)</h1>
+                    <p class="section-description">
+                        Forzar al modelo a razonar paso a paso para resolver problemas lógicos, matemáticos y de razonamiento complejo.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. ¿Qué es Chain-of-Thought?</h2>
+                    <p>Chain-of-Thought (Cadena de Pensamiento) desglosa problemas complejos en pasos intermedios de razonamiento antes de emitir una respuesta final. Reduce drásticamente los errores en matemáticas, código y lógica deductiva.</p>
+
+                    <div class="callout success">
+                        <div class="callout-icon">🚀</div>
+                        <div class="callout-content">
+                            <h4>Zero-Shot CoT: El Prompt Mágico</h4>
+                            <p>Agregar simplemente la frase <code>"Razona paso a paso antes de responder:"</code> o <code>"Let's think step by step:"</code> al final de una consulta aumenta la precisión del modelo en tareas de lógica hasta en un 40%.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Ejemplo de CoT Comparativo</h2>
+                    
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Prompt Estándar (Falla Frecuentemente)</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Pregunta: Roger tiene 5 pelotas de tenis. Compra 2 latas más de pelotas de tenis. Cada lata tiene 3 pelotas de tenis. ¿Cuántas pelotas de tenis tiene ahora?
+Respuesta:</code></pre>
+                    </div>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Prompt con Few-Shot Chain-of-Thought (Preciso)</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Pregunta: La cafetería tenía 23 manzanas. Si usaron 20 para hacer almuerzos y compraron 6 más, ¿cuántas manzanas tienen?
+Razonamiento: La cafetería tenía 23 manzanas. Usaron 20, por lo que les quedan 23 - 20 = 3. Luego compraron 6 más, así que tienen 3 + 6 = 9.
+Respuesta: 9.
+
+Pregunta: Roger tiene 5 pelotas de tenis. Compra 2 latas más de pelotas de tenis. Cada lata tiene 3 pelotas de tenis. ¿Cuántas pelotas de tenis tiene ahora?
+Razonamiento:</code></pre>
+                    </div>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Dominas el patrón Chain-of-Thought para resolución de problemas?</span>
+                    <button class="completion-btn" data-section="cot">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: ROLE PROMPTING ================= -->
+            <section id="role-prompting" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 04</span>
+                    <h1 class="section-title">Role Prompting & Personas</h1>
+                    <p class="section-description">
+                        Condiciona el tono, perspectiva, profundidad técnica y estilo de respuesta mediante asignación de roles.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. Asignación de Roles</h2>
+                    <p>Al indicarle al modelo qué personaje o profesional debe encarnar, activas clusters latentes de conocimiento especializado y ajustas el vocabulario automáticamente.</p>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <span class="card-icon">👨‍💻</span>
+                            <h3 class="card-title">Rol: Senior Code Reviewer</h3>
+                            <p class="card-desc">"Actúa como revisor principal de código en Rust. Evalúa rendimiento, manejo de memoria y elegancia."</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">👩‍🏫</span>
+                            <h3 class="card-title">Rol: Maestro para Niños</h3>
+                            <p class="card-desc">"Explica la teoría de la relatividad usando analogías sencillas como si yo tuviera 8 años."</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">⚖️</span>
+                            <h3 class="card-title">Rol: Auditor Regulatorio</h3>
+                            <p class="card-desc">"Analiza la siguiente política de privacidad identificando riesgos bajo la normativa GDPR de la UE."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Entiendes cómo aplicar Role Prompting para ajustar el tono y precisión?</span>
+                    <button class="completion-btn" data-section="role-prompting">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: FORMATO E INSTRUCCIONES ================= -->
+            <section id="formatting" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 05</span>
+                    <h1 class="section-title">Formato y Delimitadores</h1>
+                    <p class="section-description">
+                        Estructuración de prompts mediante delimitadores claros, etiquetas XML y esquemas JSON.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. Uso de Delimitadores de Texto</h2>
+                    <p>Utilizar delimitadores claros evita ataques de Prompt Injection (donde el texto de entrada intenta cambiar las instrucciones) y aclara qué parte es instrucción y qué parte son datos.</p>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Uso de Delimitadores y Etiquetas XML</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Resume el texto contenido dentro de las etiquetas &lt;articulo&gt;. Genera 3 viñetas breves.
+
+&lt;articulo&gt;
+[Inserta aquí el texto del artículo largo que podría contener frases ambiguas o instrucciones extrañas]
+&lt;/articulo&gt;
+
+Resumen:</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Salidas JSON Estructuradas</h2>
+                    <p>Para integrar la salida del LLM directamente en APIs o aplicaciones frontend/backend, exige esquemas JSON estrictos.</p>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Prompt para Salida JSON Garantizada</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Extrae los datos de contacto del siguiente texto. Responde ÚNICAMENTE en formato JSON válido según este esquema:
+
+{
+  "nombre": string,
+  "email": string,
+  "telefono": string | null
+}
+
+Texto: "Hola, soy María García, mi correo es maria@empresa.com. No tengo teléfono actualmente."</code></pre>
+                    </div>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Sabes usar delimitadores y forzar respuestas JSON en tus prompts?</span>
+                    <button class="completion-btn" data-section="formatting">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: REACT & TOT ================= -->
+            <section id="react-tot" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 06</span>
+                    <h1 class="section-title">ReAct y Tree of Thoughts (ToT)</h1>
+                    <p class="section-description">
+                        Patrones avanzados para agentes autónomos y resolución de problemas por exploración de árboles de pensamiento.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. El Patrón ReAct (Reasoning + Acting)</h2>
+                    <p>ReAct combina el razonamiento analítico con la ejecución de acciones u herramientas externas (búsquedas en la web, ejecuciones de código o consultas a bases de datos) en un bucle interactivo.</p>
+
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span class="code-lang">Estructura del Bucle ReAct</span>
+                            <button class="copy-btn">📋 Copiar</button>
+                        </div>
+                        <pre><code>Pensamiento 1: Necesito averiguar la temperatura actual en Bogotá.
+Acción 1: BuscarWeather[Bogotá]
+Observación 1: La temperatura en Bogotá es 18°C con cielo parcialmente nublado.
+
+Pensamiento 2: Ahora debo convertir 18°C a Fahrenheit para responder la pregunta completa.
+Acción 2: Calculator[18 * 9/5 + 32]
+Observación 2: 64.4
+
+Pensamiento 3: Ya tengo todos los datos necesarios.
+Respuesta Final: La temperatura en Bogotá es 18°C (64.4°F).</code></pre>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Tree of Thoughts (ToT)</h2>
+                    <p>ToT permite explorar múltiples caminos de pensamiento simultáneamente (como en un árbol de decisión), evaluando cada opción antes de decidir cuál continuar. Ideal para planificación estratégica y juegos como el ajedrez.</p>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Entiendes los patrones ReAct para agentes y Tree-of-Thoughts?</span>
+                    <button class="completion-btn" data-section="react-tot">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: PATRONES AVANZADOS ================= -->
+            <section id="advanced-patterns" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 07</span>
+                    <h1 class="section-title">Chaining, Self-Consistency y RAG-Aware</h1>
+                    <p class="section-description">
+                        Estrategias complejas para encadenar múltiples prompts, verificar respuestas y redactar con contexto recuperado.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2>1. Prompt Chaining (Encadenamiento)</h2>
+                    <p>Descompone una tarea masiva en una serie de prompts individuales donde la salida del Prompt N se convierte en la entrada del Prompt N+1. Evita la sobrecarga cognitiva en una sola llamada.</p>
+                </div>
+
+                <div class="content-block">
+                    <h2>2. Self-Consistency (Auto-Consistencia)</h2>
+                    <p>Genera múltiples rutas de razonamiento independientes (con `temperature > 0`) para la misma pregunta y elige la respuesta más votada o frecuente. Elimina fluctuaciones estocásticas.</p>
+                </div>
+
+                <div class="content-block">
+                    <h2>3. RAG-Aware Prompting</h2>
+                    <p>Técnica para instructing modelos a responder estrictamente basándose en fragmentos recuperados de una base de conocimiento, evitando alucinaciones.</p>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Comprendes cómo encadenar prompts y reducir alucinaciones con RAG?</span>
+                    <button class="completion-btn" data-section="advanced-patterns">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: MEJORES PRÁCTICAS ================= -->
+            <section id="mejores-practicas" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 08</span>
+                    <h1 class="section-title">Mejores Prácticas y Consejos</h1>
+                    <p class="section-description">
+                        Reglas de oro para optimizar y auditar prompts en producción.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <ul>
+                        <li><strong>Sé positivo y directo:</strong> Indica qué hacer en lugar de qué no hacer. Los modelos entienden mejor instrucciones directas ("Escribe en tono formal") que negativas ("No uses jerga informal").</li>
+                        <li><strong>Usa ejemplos claros:</strong> Si la tarea requiere un formato complejo, pocos disparos (Few-shot) valen más que 500 palabras de instrucciones descriptivas.</li>
+                        <li><strong>Ajusta la temperatura:</strong> Usa `temperature = 0.0` para tareas analíticas, extracción JSON o código. Usa `temperature = 0.7 - 0.9` para tareas creativas o brainstorming.</li>
+                        <li><strong>Controla el contexto:</strong> Coloca los datos de entrada al final del prompt para aprovechar el efecto de reciencia.</li>
+                    </ul>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Has revisado las mejores prácticas de Prompt Engineering?</span>
+                    <button class="completion-btn" data-section="mejores-practicas">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: GALERÍA DE EJEMPLOS ================= -->
+            <section id="galeria" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Capítulo 09</span>
+                    <h1 class="section-title">Galería de Ejemplos Prácticos</h1>
+                    <p class="section-description">
+                        Plantillas listas para usar en desarrollo de software, análisis de datos y redacción.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <span class="card-icon">💻</span>
+                            <h3 class="card-title">Refactorización de Código</h3>
+                            <p class="card-desc">Transforma código espagueti en funciones limpias con principios SOLID y tipos estáticos.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">📊</span>
+                            <h3 class="card-title">Extracción de Entidades</h3>
+                            <p class="card-desc">Parsea correos o facturas para generar objetos JSON validados.</p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">🎨</span>
+                            <h3 class="card-title">Generador de UI Tailwind</h3>
+                            <p class="card-desc">Instrucciones para generar componentes HTML/CSS accesibles y responsivos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-box">
+                    <span>¿Exploraste las plantillas de la galería de ejemplos?</span>
+                    <button class="completion-btn" data-section="galeria">Marcar como Completado</button>
+                </div>
+            </section>
+
+            <!-- ================= SECCIÓN: DEMO PLAYGROUND ================= -->
+            <section id="demo" class="doc-section">
+                <div class="section-header">
+                    <span class="section-tag">Demo Interactiva</span>
+                    <h1 class="section-title">Playground Comparativo de Prompts</h1>
+                    <p class="section-description">
+                        Experimenta en tiempo real comparando cómo responde un LLM ante un prompt ingenuo vs. un prompt optimizado con técnicas avanzadas.
+                    </p>
+                </div>
+
+                <div class="wizard-container">
+                    <div class="demo-controls">
+                        <label for="template-select" class="demo-label">Selecciona una plantilla de prueba:</label>
+                        <select id="template-select" class="demo-input" style="margin-bottom: 1rem;">
+                            <option value="math">Problema de Lógica / Matemáticas (Zero-Shot vs Chain-of-Thought)</option>
+                            <option value="code">Revisión de Código (Sin rol vs Role Prompting)</option>
+                            <option value="json">Extracción de Datos (Texto libre vs Salida JSON Estructurada)</option>
+                        </select>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="naive-prompt-input" class="demo-label">Prompt Ingenuo (Básico):</label>
+                                <textarea id="naive-prompt-input" class="demo-textarea" placeholder="Prompt sin técnicas..."></textarea>
+                            </div>
+                            <div>
+                                <label for="optimized-prompt-input" class="demo-label">Prompt Optimizado (Avanzado):</label>
+                                <textarea id="optimized-prompt-input" class="demo-textarea" placeholder="Prompt con CoT / Role / JSON..."></textarea>
+                            </div>
+                        </div>
+
+                        <button id="run-comparison-btn" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
+                            ⚡ Ejecutar Comparativa Simulada
+                        </button>
+                    </div>
+
+                    <div class="demo-results" style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Resultados de la Comparativa:</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="demo-results-list" id="naive-result-output">
+                                <p class="demo-results-empty">Haz clic en "Ejecutar Comparativa" para ver el resultado ingenuo.</p>
+                            </div>
+                            <div class="demo-results-list" id="optimized-result-output" style="border-color: var(--accent-primary);">
+                                <p class="demo-results-empty">Haz clic en "Ejecutar Comparativa" para ver el resultado optimizado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- Main JS -->
+<script src="js/app.js"></script>
+</body>
+</html>
